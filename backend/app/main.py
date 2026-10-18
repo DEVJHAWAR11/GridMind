@@ -51,7 +51,10 @@ def create_app(repo=None, bus=None, graph=None, settings=None) -> FastAPI:
     )
     app.include_router(router)
 
+    # The app polls /api/status: Brave and uBlock (EasyPrivacy) block "onrender.com/health*".
+    # /healthz stays for Render's health check and uptime pings.
     @app.get("/healthz")
+    @app.get("/api/status")
     async def healthz():
         return {"ok": True, "worker": app.state.worker is not None, "usage": app.state.usage()}
 

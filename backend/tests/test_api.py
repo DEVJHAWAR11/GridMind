@@ -218,3 +218,10 @@ def test_cors_allows_vercel_preview_hosts(client):
     ]:
         r = client.get("/healthz", headers={"Origin": origin})
         assert (r.headers.get("access-control-allow-origin") == origin) is ok, origin
+
+
+def test_status_alias_matches_healthz(client):
+    # Ad blockers drop "onrender.com/health*", so the app polls /api/status instead.
+    a, b = client.get("/healthz"), client.get("/api/status")
+    assert a.status_code == b.status_code == 200
+    assert a.json()["ok"] and b.json()["ok"]
