@@ -150,7 +150,7 @@ curl -N $API/api/sheets/$ID/events`,
 
     <section id="limits">
       <h2><span class="n">05</span>Limits</h2>
-      <table class="t">
+      <div class="t-wrap"><table class="t">
         <tbody>
           <tr><th>Rows per sheet</th><td>50</td></tr>
           <tr><th>Columns per sheet</th><td>10</td></tr>
@@ -160,7 +160,7 @@ curl -N $API/api/sheets/$ID/events`,
           <tr><th>Research passes per cell</th><td>2</td></tr>
           <tr><th>Cell timeout</th><td>120 seconds, up to 3 attempts</td></tr>
         </tbody>
-      </table>
+      </table></div>
     </section>
 
     <section id="api">
@@ -260,12 +260,15 @@ curl -N $API/api/sheets/$ID/events`,
   }
   .content {
     max-width: 760px;
+    min-width: 0;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--s-8);
   }
   section {
     scroll-margin-top: calc(var(--header-h) + 24px);
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--s-4);
   }
   h2 {
@@ -318,17 +321,20 @@ curl -N $API/api/sheets/$ID/events`,
     list-style: none;
     padding: 0;
   }
+  /* The number sits in the gutter; a grid here would split the text and links into cells. */
   .steps li {
     counter-increment: s;
-    display: grid;
-    grid-template-columns: 36px 1fr;
+    position: relative;
+    padding-left: 36px;
   }
   .steps li::before {
     content: counter(s, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 3px;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--accent-text);
-    padding-top: 3px;
   }
   .note {
     border-left: 2px solid var(--accent);
@@ -407,6 +413,9 @@ curl -N $API/api/sheets/$ID/events`,
     letter-spacing: 0.08em;
     color: var(--accent-text);
     padding-top: 4px;
+  }
+  .t-wrap {
+    overflow-x: auto;
   }
   .t {
     border-collapse: collapse;
