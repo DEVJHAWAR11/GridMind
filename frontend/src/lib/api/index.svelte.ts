@@ -20,7 +20,7 @@ export const conn = $state({
 let pending: Promise<boolean> | null = null
 const WAKE_LIMIT_MS = 75_000 // Render free tier cold starts take ~30-60s
 
-/** Ping /healthz, waiting through a cold start. Resolves true when the live API is usable. */
+/** Ping /api/status, waiting through a cold start. Resolves true when the live API is usable. */
 export function connect(): Promise<boolean> {
   if (!API_URL) return Promise.resolve(false)
   if (conn.status === 'live') return Promise.resolve(true)

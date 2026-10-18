@@ -42,7 +42,7 @@ const json = (method: string, body: unknown): RequestInit => ({ method, body: JS
 
 export async function health(timeoutMs: number) {
   return req<{ ok: boolean; worker: boolean; usage: Record<string, { used: number; cap: number; period: string }> }>(
-    '/healthz',
+    '/api/status',
     {},
     timeoutMs,
   )
