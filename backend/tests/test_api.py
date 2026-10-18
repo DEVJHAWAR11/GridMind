@@ -208,3 +208,13 @@ def test_budget_caps_calls_and_is_not_retryable():
     b = Budget("t", 2, "day")
     assert [b.try_spend() for _ in range(3)] == [True, True, False]
     assert BudgetExceeded.retryable is False
+
+
+def test_cors_allows_vercel_preview_hosts(client):
+    for origin, ok in [
+        ("https://grid-mind-tan.vercel.app", True),
+        ("https://grid-mind-git-main-case-compass1.vercel.app", True),
+        ("https://evil-grid-mind.vercel.app", False),
+    ]:
+        r = client.get("/healthz", headers={"Origin": origin})
+        assert (r.headers.get("access-control-allow-origin") == origin) is ok, origin

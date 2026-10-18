@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     supabase_service_key: str = ""
     redis_url: str = ""  # optional: enables cross-instance live updates
     frontend_origin: str = "http://localhost:5173"
+    # Vercel serves the UI on several hosts (production alias, branch and per-deploy URLs).
+    frontend_origin_regex: str = r"https://grid-mind(-[a-z0-9-]+)?\.vercel\.app"
 
     # Worker / throughput
     run_worker: bool = True  # False = API-only instance (worker can be split out)

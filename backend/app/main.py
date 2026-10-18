@@ -45,6 +45,7 @@ def create_app(repo=None, bus=None, graph=None, settings=None) -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[o.strip() for o in s.frontend_origin.split(",") if o.strip()],
+        allow_origin_regex=s.frontend_origin_regex or None,
         allow_methods=["*"],
         allow_headers=["*"],
     )
