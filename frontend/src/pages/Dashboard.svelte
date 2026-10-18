@@ -85,7 +85,7 @@
 <AppHeader />
 
 <div class="frame page" use:reveal>
-  {#if conn.status === 'waking' || conn.status === 'checking'}
+  {#if conn.status === 'waking'}
     <div class="banner" transition:fly={{ y: -8, duration: 200 }}>
       <span class="ring"></span>
       <p>

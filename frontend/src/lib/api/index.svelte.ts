@@ -31,7 +31,7 @@ export function connect(): Promise<boolean> {
     try {
       for (let i = 0; ; i++) {
         try {
-          const h = await health(i === 0 ? 5000 : 12000)
+          const h = await health(i === 0 ? 10000 : 12000)
           conn.usage = h.usage
           conn.status = 'live'
           return true
