@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>GridMind · Spreadsheets that research themselves</title>
+    <meta name="description" content="GridMind is a spreadsheet where AI agents research the web and fill every cell with an answer and its source." />
+    <meta name="theme-color" content="#F1EEE7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12110F" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Set the theme before first paint so there is no flash.
+      try {
+        var t = localStorage.getItem('gm-theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  min-height: 100dvh;
+  overflow-x: clip; /* hero art bleeds past the frame on purpose */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--t-med) var(--ease), color var(--t-med) var(--ease);
+}
+/* Faint drafting grid behind everything; drifts slightly with scroll (see lib/motion.ts). */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 calc(var(--scroll-y, 0) * -0.05px);
+}
+img, svg, canvas { display: block; max-width: 100%; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; left: 16px; top: -48px; z-index: 100; background: var(--ink); color: var(--paper); padding: 8px 12px; font-size: var(--fs-sm); }
+.skip-link:focus { top: 12px; }
+
+.frame { width: 100%; max-width: calc(var(--frame) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ---- type ---- */
+.display {
+  font-family: var(--font-display);
+  font-stretch: 82%;
+  font-weight: 800;
+  font-size: var(--fs-display);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-stretch: 82%;
+  font-weight: 800;
+  font-size: var(--fs-h2);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+.h3 { font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.01em; }
+.accent { color: var(--accent); }
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.label .num, .num-accent { color: var(--accent-text); }
+.muted { color: var(--ink-3); }
+.prose { font-family: var(--font-sans); font-size: 1rem; line-height: 1.7; color: var(--ink-2); }
+
+/* Bracketed eyebrow: a small orange tick at the first letter, like the reference. */
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ''; width: 6px; height: 12px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+
+/* ---- buttons ---- */
+.btn {
+  --b: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--b);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.btn .arrow { transition: transform var(--t-fast) var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.btn-primary { --b: var(--accent-strong); background: var(--accent-strong); color: var(--on-accent); }
+.btn-primary:hover:not(:disabled) { background: var(--ink); --b: var(--ink); color: var(--paper); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-ink:hover:not(:disabled) { background: var(--accent-strong); --b: var(--accent-strong); color: var(--on-accent); }
+.btn-ghost { background: transparent; color: var(--ink); --b: var(--line); }
+.btn-ghost:hover:not(:disabled) { --b: var(--ink); background: var(--surface); }
+.btn-sm { min-height: 34px; padding: 0 12px; font-size: 0.75rem; gap: 8px; }
+.btn-icon { min-height: 34px; width: 34px; padding: 0; }
+
+/* bracketed text link: [ Docs ] */
+.bracket { position: relative; font-size: var(--fs-sm); color: var(--ink-2); padding: 6px 2px; transition: color var(--t-fast) var(--ease); }
+.bracket::before { content: '[ '; color: var(--ink-3); transition: color var(--t-fast); }
+.bracket::after { content: ' ]'; color: var(--ink-3); transition: color var(--t-fast); }
+.bracket:hover, .bracket[aria-current='page'] { color: var(--ink); }
+.bracket:hover::before, .bracket:hover::after, .bracket[aria-current='page']::before, .bracket[aria-current='page']::after { color: var(--accent); }
+
+/* ---- form fields ---- */
+.field {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  font-size: var(--fs-sm);
+  transition: border-color var(--t-fast) var(--ease);
+}
+.field:hover { border-color: var(--ink-3); }
+.field:focus { outline: none; border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+textarea.field { resize: vertical; line-height: 1.5; }
+
+/* ---- pills / tags ---- */
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; font-size: 0.75rem; line-height: 1.6; border: 1px solid transparent; }
+.pill-ok { background: var(--ok-bg); color: var(--ok); }
+.pill-err { background: var(--err-bg); color: var(--err); }
+.pill-line { border-color: var(--line); color: var(--ink-3); }
+.tag { display: inline-block; padding: 0 6px; font-size: 0.6875rem; color: var(--ink-3); border: 1px solid var(--line); background: var(--paper); }
+
+/* ---- reveal-on-scroll (lib/motion.ts adds .is-in) ---- */
+[data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease); transition-delay: var(--d, 0ms); }
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* spinner ring used for live agent states */
+.ring { width: 14px; height: 14px; border: 2px solid var(--accent-wash); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; flex: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+  .ring { animation: spin 1.6s linear infinite !important; animation-iteration-count: infinite !important; animation-duration: 1.6s !important; }
+}

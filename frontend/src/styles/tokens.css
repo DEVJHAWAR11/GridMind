@@ -1,0 +1,101 @@
+:root {
+  --paper: #f1eee7;
+  --paper-2: #e8e4da;
+  --surface: #f8f6f1;
+  --ink: #121212;
+  --ink-2: #3b3a36;
+  --ink-3: #68655e;
+  --line: #cdc8bd;
+  --grid: rgb(18 18 18 / 0.06);
+  --accent: #e8431a;
+  --accent-strong: #d63b12;
+  --on-accent: #ffffff;
+  --accent-text: #b8330c;
+  --accent-wash: rgb(232 67 26 / 0.1);
+  --ok: #2f5a2a;
+  --ok-bg: #dce5d2;
+  --err: #a3261a;
+  --err-bg: #f3dad3;
+  --shadow-hard: 6px 6px 0 rgb(18 18 18 / 0.08);
+  --halftone-ink: #121212;
+  color-scheme: light;
+
+  --font-display: 'Archivo Variable', 'Arial Narrow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-display: clamp(2.6rem, 7.4vw, 6.4rem);
+  --fs-h2: clamp(2rem, 4.8vw, 4rem);
+  --fs-h3: 1.25rem;
+  --fs-body: 0.9375rem;
+  --fs-sm: 0.8125rem;
+  --fs-label: 0.6875rem;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  --frame: 1240px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 64px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+  --t-slow: 640ms;
+}
+
+/* Dark is its own palette: warm ink page, off-white type, slightly brighter orange. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #12110f;
+    --paper-2: #1b1a17;
+    --surface: #181714;
+    --ink: #ede8de;
+    --ink-2: #c6c0b4;
+    --ink-3: #918b80;
+    --line: #33302b;
+    --grid: rgb(237 232 222 / 0.05);
+    --accent: #ff5a2a;
+    --accent-strong: #f04e1f;
+    --on-accent: #12110f;
+    --accent-text: #ff8157;
+    --accent-wash: rgb(255 90 42 / 0.12);
+    --ok: #a9d49c;
+    --ok-bg: #1f2b1c;
+    --err: #ff9c8a;
+    --err-bg: #341a15;
+    --shadow-hard: 6px 6px 0 rgb(0 0 0 / 0.45);
+    --halftone-ink: #ede8de;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #12110f;
+  --paper-2: #1b1a17;
+  --surface: #181714;
+  --ink: #ede8de;
+  --ink-2: #c6c0b4;
+  --ink-3: #918b80;
+  --line: #33302b;
+  --grid: rgb(237 232 222 / 0.05);
+  --accent: #ff5a2a;
+  --accent-strong: #f04e1f;
+  --on-accent: #12110f;
+  --accent-text: #ff8157;
+  --accent-wash: rgb(255 90 42 / 0.12);
+  --ok: #a9d49c;
+  --ok-bg: #1f2b1c;
+  --err: #ff9c8a;
+  --err-bg: #341a15;
+  --shadow-hard: 6px 6px 0 rgb(0 0 0 / 0.45);
+  --halftone-ink: #ede8de;
+  color-scheme: dark;
+}

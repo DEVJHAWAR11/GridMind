@@ -1,0 +1,28 @@
+# Render Blueprint: API + in-process worker on the free plan.
+# Scale-out later: raise `numInstances`, or deploy a second service with
+# RUN_WORKER=false (API-only) and another with only the worker. Set REDIS_URL
+# on all of them so live updates cross instances.
+services:
+  - type: web
+    name: gridmind-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.5
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false # e.g. https://gridmind.vercel.app
